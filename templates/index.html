@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head><meta charset="UTF-8"><title>Aviator Auto-Player</title></head>
+<body style="font-family:Arial,sans-serif;background:#121212;color:#fff;padding:30px;text-align:center;">
+
+  <div id="login-panel" style="max-width:320px;margin:auto;padding:20px;background:#1e1e1e;border-radius:12px;">
+    <h2 style="color:#4caf50;">Login Panel</h2>
+    <input id="username" type="text" placeholder="Username" style="width:90%;padding:10px;margin:10px 0;border-radius:6px;border:none;">
+    <input id="password" type="password" placeholder="Password" style="width:90%;padding:10px;margin-bottom:10px;border-radius:6px;border:none;">
+    <button onclick="login()" style="padding:10px 20px;background:#4caf50;border:none;border-radius:6px;color:#fff;cursor:pointer;">Login</button>
+    <p id="login-error" style="color:red;display:none;">Invalid credentials</p>
+  </div>
+
+  <div id="dashboard" style="display:none;max-width:360px;margin:20px auto;padding:20px;background:#1e1e1e;border-radius:12px;">
+    <h2 style="color:#4caf50;">Aviator Bot</h2>
+    <p>Status: <span id="status" style="color:yellow;">Idle</span></p>
+    <button onclick="startBot()" style="width:100%;padding:12px;background:#2196f3;border:none;border-radius:8px;color:#fff;">Start Playing For Me</button>
+    <button onclick="stopBot()" style="width:100%;margin-top:10px;padding:12px;background:#f44336;border:none;border-radius:8px;color:#fff;">Stop Playing</button>
+  </div>
+
+<script>
+  const USER = "Molefi", PASS = "Nkopane";
+  function login(){
+    if (username.value===USER && password.value===PASS){
+      login-panel.style.display="none"; dashboard.style.display="block";
+    } else login-error.style.display="block";
+  }
+  function startBot(){
+    fetch("/start",{method:"POST"}).then(()=>{status.innerText="Running";status.style.color="lightgreen";});
+  }
+  function stopBot(){
+    fetch("/stop",{method:"POST"}).then(()=>{status.innerText="Stopped";status.style.color="red";});
+  }
+</script>
+</body>
+</html>
